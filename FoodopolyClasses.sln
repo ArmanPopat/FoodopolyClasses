@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodopolyClasses", "FoodopolyClasses.csproj", "{FEB64FEC-B027-4D86-B51F-AE0E20E75595}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FEB64FEC-B027-4D86-B51F-AE0E20E75595}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEB64FEC-B027-4D86-B51F-AE0E20E75595}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEB64FEC-B027-4D86-B51F-AE0E20E75595}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEB64FEC-B027-4D86-B51F-AE0E20E75595}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {228B666C-84C3-4893-BA0D-4BFDAD2D71ED}
+	EndGlobalSection
+EndGlobal

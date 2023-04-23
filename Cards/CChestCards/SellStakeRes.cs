@@ -1,0 +1,26 @@
+﻿using GameClasses;
+using PlayerClasses;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FoodopolyClasses.Cards.CChestCards;
+
+public class SellStakeRes:ICard
+{
+    public string CardMsg { get; }
+
+    public SellStakeRes()
+    {
+        CardMsg = "Your Sell Your Stake In A Restaurant. Recieve £100.";
+    }
+    public (string DoTask, string? Result) Method(PlayerClass player, GameClass game)
+    {
+        string msg = $"{player.Name} recieves £100 from selling his stake at a restaurant.";
+        player.Cash += 100;
+
+        return ("Nothing", msg);
+    }
+}
