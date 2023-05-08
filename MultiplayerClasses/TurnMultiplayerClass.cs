@@ -23,7 +23,7 @@ public class TurnMultiplayerClass
     }
     
 
-    public void NewTurn()
+    public void Reset()
     {
         turnMethodCount = 0;
         turnMsgCount = 0;

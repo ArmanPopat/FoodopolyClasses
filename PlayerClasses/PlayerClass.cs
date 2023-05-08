@@ -105,14 +105,18 @@ public class PlayerClass
             msg = $"You rolled a {diceRoll.Dice1} and a {diceRoll.Dice2}, you move forward {diceRoll.Total} spaces.";
             //PlayerPos += diceRoll.Total;
             FullChangePlayerPos(diceRoll.Total);
-            //Ends roll Event
-            game.Turn.RollEventDone = true;
 
+            
             if (diceRoll.Double)
             {
                 msg += "You rolled a double, roll again!";
                 game.Turn.NumOfDoubles++;
                 
+            }
+            else
+            {
+                //Ends roll Event
+                game.Turn.RollEventDone = true;
             }
             return (msg, diceRoll.Double, false, diceRoll.Total);
         }

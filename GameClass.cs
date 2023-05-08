@@ -32,7 +32,7 @@ public class GameClass
     public int Id { get; }
 
 
-    public int CurrentTurnPos { get; private set; }
+    public int CurrentTurnPos { get; internal set; }
 
     //private ChanceCards chanceCards;
     public GoOnADiet goOnADiet;
@@ -83,7 +83,7 @@ public class GameClass
 
         //string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"StandardInformation", "Properties.xml");
         //XElement root = XElement.Load(path);
-        XElement root = XElement.Load("C:\\Users\\arman\\Documents\\ApssStuf\\FoodopolyClasses\\StandardInformation\\Properties.xml");
+        XElement root = XElement.Load("Properties.xml");
         //XElement root = XElement.Load("Properties.xml");  //Temp Solution, Will fix
 
         IEnumerable<XElement> sets = root.Elements("set");

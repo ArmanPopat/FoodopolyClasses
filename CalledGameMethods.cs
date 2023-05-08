@@ -1,4 +1,5 @@
 ﻿using BoardClasses;
+using GameClasses;
 using PlayerClasses;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FoodopolyClasses;
 
-public class CalledGameMethods
+public static class CalledGameMethods
 {
     //public string StartTurnEvent(PlayerClass player)
     //{
@@ -20,7 +21,7 @@ public class CalledGameMethods
 
     
 
-    public void AcceptTrade(PlayerClass proposer, PlayerClass proposee, List<BasePropertyClass> proposerGiveProps,
+    public static void AcceptTrade(PlayerClass proposer, PlayerClass proposee, List<BasePropertyClass> proposerGiveProps,
         List<BasePropertyClass> proposeeGiveProps, int proposerGiveCash, int proposeeGiveCash)
     {
         List<BasePropertyClass> proposerMortgagedProps = new List<BasePropertyClass>();
@@ -94,5 +95,13 @@ public class CalledGameMethods
         proposee.Cash -= proposeeGiveCash;
 
         //Run Unmortgage Props
+    }
+
+    public static void NextTurn(GameClass game)
+    {
+        int playerListCount = game.PlayerList.Count;
+        game.CurrentTurnPos = ((game.CurrentTurnPos + 1) % playerListCount) + 1;
+        game.Turn.Reset();
+        game.TurnMultiplayer.Reset();
     }
 }
