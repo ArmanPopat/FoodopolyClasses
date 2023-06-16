@@ -53,10 +53,18 @@ public class Property : BasePropertyClass
         }
         return msg;
     }
+
+    //Must First Validate to see if owner exists, i.e. is owned
+    //Called To Upgrade Property
     public string? Upgrade() 
     { 
+        if (Owner == null)
+        {
+            throw new InvalidOperationException("Property has no owner, cannot be upgraded");
+        }
         NumOfUpgrades++;
-        return string.Empty;
+        Owner.Cash -= UpgradeCost;
+        return $"{Owner.Name} has Upgraded {Name} to level {NumOfUpgrades}.";
     }
     public override void ResetProperty()
     {

@@ -69,7 +69,12 @@ public abstract class BasePropertyClass : BoardSpace
 
     public virtual SetProp GetSet(GameClass game)
     {
-        SetProp set = game.setsPropDict[SetName];
+        if (string.IsNullOrEmpty(SetName))
+        {
+            throw new InvalidDataException("No Set Name");
+        }
+        string uncapitalisedSetName = char.ToLower(SetName[0]) + SetName[1..];
+        SetProp set = game.setsPropDict[uncapitalisedSetName];
         return set;
     }
 

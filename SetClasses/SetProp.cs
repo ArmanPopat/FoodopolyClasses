@@ -51,13 +51,13 @@ public class SetProp:SetBase
             {
                 throw new ArgumentNullException(nameof(Properties));
             }
-            else if (Properties.Any(o => o == null))
+            else if (Properties.Any(o => o.Owned == false))
             {
                 return false;
             }
             else
             {
-                var propertyOwners = Properties.Select(o => o.Owner).ToList();
+                var propertyOwners = Properties.Select(o => o.Owner.Name).ToList();
                 if (!propertyOwners.Any(o => o != propertyOwners[0]))
                 {
                     //Console.WriteLine("Hellllo");
