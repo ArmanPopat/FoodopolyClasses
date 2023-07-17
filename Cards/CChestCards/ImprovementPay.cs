@@ -1,6 +1,6 @@
 ﻿using BoardClasses;
 using GameClasses;
-using PlayerClasses;
+using FoodopolyClasses.PlayerClasses;
 using SetClasses;
 using System;
 using System.Collections.Generic;

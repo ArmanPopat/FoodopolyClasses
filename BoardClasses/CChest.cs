@@ -2,7 +2,7 @@
 using FoodopolyClasses.Cards;
 using FoodopolyClasses.Cards.CChestCards;
 using GameClasses;
-using PlayerClasses;
+using FoodopolyClasses.PlayerClasses;
 using System;
 
 namespace BoardClasses;

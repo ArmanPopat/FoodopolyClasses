@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BoardClasses;
 using FoodopolyClasses.SetClasses;
-using PlayerClasses;
+using FoodopolyClasses.PlayerClasses;
 
 namespace  SetClasses;
 

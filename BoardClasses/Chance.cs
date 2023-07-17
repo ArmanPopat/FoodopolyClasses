@@ -4,7 +4,7 @@ using System.Web;
 using FoodopolyClasses.BoardClasses;
 using FoodopolyClasses.Cards.CChestCards;
 using FoodopolyClasses.Cards;
-using PlayerClasses;
+using FoodopolyClasses.PlayerClasses;
 
 namespace BoardClasses;
 

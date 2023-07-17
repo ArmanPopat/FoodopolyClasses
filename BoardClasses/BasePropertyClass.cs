@@ -1,6 +1,6 @@
 ﻿using System;
 using GameClasses;
-using PlayerClasses;
+using FoodopolyClasses.PlayerClasses;
 using SetClasses;
 
 namespace BoardClasses;
@@ -103,25 +103,21 @@ public abstract class BasePropertyClass : BoardSpace
         }
     }
 
-    public void Mortgage(PlayerClass player)
+    //Removed Validation
+    public string Mortgage()
     {
-        if (Owner == null)
+        if (Owned == false || Owner == null)
         {
             //Console.WriteLine("Cannot mortgage an unowned property.");
             throw new InvalidOperationException("Cannot mortgage an unowned property.");
         }
         else
         {
-            if (Owner != player)
-            {
-                //Console.WriteLine("Only the owner can mortgage.");
-                throw new InvalidOperationException("Only the owner can mortgage.");
-            }
-            else
-            {
-                Mortgaged = true;
-                player.Cash += (Price / 2);
-            }
+            
+            Mortgaged = true;
+            Owner.Cash += (Price / 2);
+            return $"{Owner.Name} mortgaged {Name}.";
+            
         }
     }
 

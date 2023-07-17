@@ -1,6 +1,6 @@
 ﻿using System;
 using GameClasses;
-using PlayerClasses;
+using FoodopolyClasses.PlayerClasses;
 using SetClasses;
 
 namespace BoardClasses;

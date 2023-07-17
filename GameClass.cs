@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Runtime.ConstrainedExecution;
 using System.Xml.Linq;
 using BoardClasses;
-using PlayerClasses;
+using FoodopolyClasses.PlayerClasses;
 using StandardInformation;
 using SetClasses;
 using FoodopolyClasses.MultiplayerClasses;

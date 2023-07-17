@@ -1,16 +1,13 @@
-﻿using System;
-using StandardInformation;
+﻿using StandardInformation;
 using BoardClasses;
-using System.Runtime.CompilerServices;
-using Microsoft.VisualBasic;
 using SetClasses;
 using System.Diagnostics;
-using System.Numerics;
 using GameClasses;
 using FoodopolyClasses.SetClasses;
-using static System.Collections.Specialized.BitVector32;
+using System.Numerics;
+using System.Security.Cryptography.X509Certificates;
 
-namespace PlayerClasses;
+namespace FoodopolyClasses.PlayerClasses;
 
 public class PlayerClass
 {
@@ -25,8 +22,9 @@ public class PlayerClass
     public int NumOfGODCards { get; set; } //Number of Get Out of Dieting Cards
 
     public bool Bankrupt { get; private set; }
-    
+
     //public bool RolledYetThisTurn { get; private set; }
+
 
     public PlayerClass(string name, string password, int startingCash, Icons? icon, /*int playingPos,*/ int playerPos = 0)
     {
@@ -48,16 +46,16 @@ public class PlayerClass
             throw new InvalidCastException("Username Cannot Be Empty");
         }
         Name = name;
-        
+
         password = password.Trim();  //Policy to trim all passwords
         if (password == "")
         {
             throw new InvalidCastException("User Password Cannot Be Empty");
         }
-        Password= password;
-        
+        Password = password;
+
         Icon = icon;
-        
+
         //if ((playingPos >= 1) && (playingPos <= 4))
         //{
         //    PlayingPos = playingPos;
@@ -66,7 +64,7 @@ public class PlayerClass
         //{
         //    throw new ArgumentOutOfRangeException(nameof(playingPos), "PlayingPos position must be between 1 and 4");
         //}
-        
+
         PlayerPos = playerPos;
         Dieting = false;
         NumOfDietRolls = 0;
@@ -90,7 +88,7 @@ public class PlayerClass
         //Console.WriteLine($"You rolled a {dice1} and a {dice2}, you move forward {total} spaces.");
         return (total, dice1, dice2, dice1 == dice2);
     }
-    
+
     /*
      * Method that changes player postition for each roll, keeps track of doubles, doubles lead to extra roll except for 3 doubles in a row that send the player to jail.
      */
@@ -99,19 +97,19 @@ public class PlayerClass
         //int numOfDouble = 0;
         //var testCase = (Total : 12, Dice1: 6, Dice2: 6, Double: true);
         string msg;
-        if ( game.Turn.NumOfDoubles < 2)
+        if (game.Turn.NumOfDoubles < 2)
         {
             var diceRoll = RollDiceOnce();
             msg = $"You rolled a {diceRoll.Dice1} and a {diceRoll.Dice2}, you move forward {diceRoll.Total} spaces.";
             //PlayerPos += diceRoll.Total;
             FullChangePlayerPos(diceRoll.Total);
 
-            
+
             if (diceRoll.Double)
             {
                 msg += "You rolled a double, roll again!";
                 game.Turn.NumOfDoubles++;
-                
+
             }
             else
             {
@@ -126,7 +124,7 @@ public class PlayerClass
             msg = $"You rolled a {diceRoll2.Dice1} and a {diceRoll2.Dice2}. \n";
             msg += "You rolled 3 doubles in a row. Go on a Diet!";
             //GOAD automatically ends rollevent
-            game.goOnADiet.GoOnADietMethod(this,game);  //check
+            game.goOnADiet.GoOnADietMethod(this, game);  //check
             return (msg, diceRoll2.Double, true, diceRoll2.Total);
         }
         else
@@ -136,7 +134,7 @@ public class PlayerClass
             //Ends roll Event
             game.Turn.RollEventDone = true;
             return (msg, diceRoll2.Double, false, diceRoll2.Total);
-            
+
         }
 
     }
@@ -166,7 +164,7 @@ public class PlayerClass
             passGo = false;
         }
 
-        PlayerPos = (movement + PlayerPos)%40;
+        PlayerPos = (movement + PlayerPos) % 40;
 
         return (forward, passGo);
     }
@@ -186,7 +184,7 @@ public class PlayerClass
         string? msg = null;
         if (change.PassGo)
         {
-            msg = PassGo(); 
+            msg = PassGo();
         }
         return (change.Forward, msg);
     }
@@ -201,22 +199,22 @@ public class PlayerClass
 
             foreach (Property property in valuePair.Value.Properties)
             {
-                
-                    
-                    if (property.Owner == this)
+
+
+                if (property.Owner == this)
+                {
+                    if (property.Mortgaged)
                     {
-                        if (property.Mortgaged)
-                        {
-                            continue;
-                        }
-                        totalCashFromProperties += property.UpgradeCost / 2 * property.NumOfUpgrades;
-                        totalCashFromProperties += property.Price / 2;
+                        continue;
                     }
-                
-                
-                
+                    totalCashFromProperties += property.UpgradeCost / 2 * property.NumOfUpgrades;
+                    totalCashFromProperties += property.Price / 2;
+                }
+
+
+
             }
-            
+
         }
         foreach (Station station in game.stations.Properties)
         {
@@ -349,7 +347,7 @@ public class PlayerClass
         //string msg = string.Empty;   ///Only for testing
         return msg;
     }
-    
+
     //Triggers Land Event, may wanna try simplify this later
     public async Task<(string DoTask, string? Result)> LandEventAsync(GameClass game)
     {
@@ -357,9 +355,9 @@ public class PlayerClass
         {
             PlayerPos = 0;
             throw new InvalidProgramException("Player Cannot Have A Board Position higher than 39");
-            
+
         }
-        foreach (KeyValuePair<string,SetProp> keyValue in game.setsPropDict)
+        foreach (KeyValuePair<string, SetProp> keyValue in game.setsPropDict)
         {
             foreach (Property property in keyValue.Value.Properties)
             {
@@ -401,7 +399,7 @@ public class PlayerClass
 
 
         //JUST FOR TESTING
-        return (string.Empty,string.Empty);
+        return (string.Empty, string.Empty);
     }
 
     //method for player to buy, calls the specific buy method on property, MUST VALIDATE CURRENT TURN BEFORE CALLING
@@ -428,7 +426,7 @@ public class PlayerClass
                 Property? selectedProp = null;
                 foreach (KeyValuePair<string, SetProp> keyValuePair in thisGame.setsPropDict)
                 {
-                    
+
                     foreach (Property property in keyValuePair.Value.Properties)
                     {
                         if (property.BoardPosition == PlayerPos)
@@ -436,11 +434,11 @@ public class PlayerClass
                             selectedProp = property;
 
                             selectedProp.Buy(this);
-                            
+
                         }
 
                     }
-                    
+
                 }
                 if (selectedProp == null)
                 {
@@ -454,5 +452,49 @@ public class PlayerClass
                 throw;
             }
         }
+    }
+    public (List<Station> Stations, List<Utility> Utilities, List<Property> Properties) GetOwnedPropsAndStuff(GameClass game)
+    {
+        List<Station> stations = new List<Station>();
+        List<Utility> utilities = new List<Utility>();
+        List<Property> properties = new List<Property>();
+        foreach (Station station in game.stations.Properties)
+        {
+            if (!station.Owned)
+            {
+                continue;
+            }
+            if (station.Owner.Name == Name)
+            {
+                stations.Add(station);
+            }
+        }
+        foreach (Utility utility in game.utilities.Properties)
+        {
+            if (!utility.Owned)
+            {
+                continue;
+            }
+            if (utility.Owner.Name == Name)
+            {
+                utilities.Add(utility);
+            }
+        }
+        foreach (KeyValuePair<string, SetProp> keyValue in game.setsPropDict)
+        {
+            foreach (Property property in keyValue.Value.Properties)
+            {
+                if (!property.Owned)
+                {
+                    continue;
+                }
+                if (property.Owner.Name == Name)
+                {
+                    properties.Add(property);
+                }
+            }
+        }
+
+        return (stations, utilities, properties);
     }
 }

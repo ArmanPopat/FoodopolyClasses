@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using GameClasses;
-using PlayerClasses;
+using FoodopolyClasses.PlayerClasses;
 
 namespace BoardClasses;
 

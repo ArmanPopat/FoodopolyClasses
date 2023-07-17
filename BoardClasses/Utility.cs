@@ -1,4 +1,4 @@
-﻿using PlayerClasses;
+﻿using FoodopolyClasses.PlayerClasses;
 using System;
 using SetClasses;
 using Microsoft.VisualBasic;
