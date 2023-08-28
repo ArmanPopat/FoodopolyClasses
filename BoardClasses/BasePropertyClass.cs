@@ -121,6 +121,23 @@ public abstract class BasePropertyClass : BoardSpace
         }
     }
 
+    public string UnMortgage()
+    {
+        if (Owned == false || Owner == null || Mortgaged == false)
+        {
+            //Console.WriteLine("Cannot mortgage an unowned property.");
+            throw new InvalidOperationException("Cannot unmortgage.");
+        }
+        else
+        {
+
+            Mortgaged = false;
+            Owner.Cash -= (Price / 2);
+            return $"{Owner.Name} unmortgaged {Name}.";
+
+        }
+    }
+
     public bool IsUnOwnedOrOwner(PlayerClass player)
     {
         if ((Owned == false) || (Owner == player))

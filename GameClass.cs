@@ -9,6 +9,7 @@ using SetClasses;
 using FoodopolyClasses.MultiplayerClasses;
 using FoodopolyClasses.SetClasses;
 using FoodopolyClasses.TurnClasses;
+using FoodopolyClasses.Records;
 
 namespace GameClasses;
 
@@ -30,6 +31,8 @@ public class GameClass
     public List<PlayerClass> PlayerList { get; set; }
     public string Password { get; }
     public int Id { get; }
+
+    public Dictionary<int, InitiateTradeRecord> TradeRecords { get; set; } = new Dictionary<int, InitiateTradeRecord>();
 
 
     public int CurrentTurnPos { get; internal set; }

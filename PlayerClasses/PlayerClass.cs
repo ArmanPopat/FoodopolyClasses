@@ -6,6 +6,7 @@ using GameClasses;
 using FoodopolyClasses.SetClasses;
 using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
+using FoodopolyClasses.Records;
 
 namespace FoodopolyClasses.PlayerClasses;
 
@@ -25,6 +26,7 @@ public class PlayerClass
 
     //public bool RolledYetThisTurn { get; private set; }
 
+    public List<InitiateTradeRecord> MorgatgeFeesNotPaidOrUnMortgaged { get; set; } = new List<InitiateTradeRecord>();
 
     public PlayerClass(string name, string password, int startingCash, Icons? icon, /*int playingPos,*/ int playerPos = 0)
     {
@@ -496,5 +498,16 @@ public class PlayerClass
         }
 
         return (stations, utilities, properties);
+    }
+
+    //check if mortgage fees still need to be paid
+    public bool CheckIfMortgageFeesHaveToBePaid()
+    {
+        //Need To Implement
+        if (MorgatgeFeesNotPaidOrUnMortgaged.Count > 0)
+        {
+            return true;
+        }
+        return false;
     }
 }
